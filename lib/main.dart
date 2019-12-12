@@ -1,7 +1,8 @@
-import 'package:blank_app/answer.dart';
 import 'package:flutter/material.dart';
 
-import './question.dart';
+import 'quiz.dart';
+import 'result.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -44,14 +45,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('Mein Superquiz'),
         ),
-        body: _questionIndex < _questions.length ? Column(
-          children: <Widget>[
-            Question(_questions[_questionIndex]['questionText']),
-            ...(_questions[_questionIndex]['answers'] as List<String>).map((answer) {
-              return Answer(answer, _questionAnswered, (_questions[_questionIndex]['answers'] as List<String>).indexOf(answer));
-            })
-          ],
-        ) : Center(child: Text('Yes, you did it.'),),
+        body: _questionIndex < _questions.length ? Quiz(questions: _questions, questionAnswered: _questionAnswered, questionIndex: _questionIndex,) : Result(message: 'Yes, you did it!',),
       ),
     );
   }
